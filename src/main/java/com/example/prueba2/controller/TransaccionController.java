@@ -2,21 +2,21 @@ package com.example.prueba2.controller;
 
 
 import com.example.prueba2.entity.Transaccion;
-import com.example.prueba2.service.TransaccionService;
+import com.example.prueba2.service.TransaccionDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TransaccionController {
     @Autowired
-    private TransaccionService transaccionService;
+    private TransaccionDao transaccionService;
 
     // Save operation
     @PostMapping("/transaccion")
-    public Transaccion saveDepartment(
+    public void saveDepartment(
             @RequestBody Transaccion transaccion) {
 
-        return transaccionService.saveTransaccion(transaccion);
+        transaccionService.registrarTransaccion(transaccion);
     }
 
     @PutMapping("/transaccion/{id}")
@@ -24,7 +24,7 @@ public class TransaccionController {
     updateDepartment(@RequestBody Transaccion transaccion,
                      @PathVariable("id") Long transaccionId) {
 
-        return transaccionService.updateTransaccion(
+        return transaccionService.modificarTransaccion(
                 transaccion, transaccionId);
     }
 }

@@ -8,18 +8,18 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
-public class TransaccionServiceImpl implements TransaccionService {
+public class TransaccionServiceImpl implements TransaccionDao {
 
     @Autowired
     private TransaccionRepository transaccionRepository;
 
     @Override
-    public Transaccion saveTransaccion(Transaccion transaccion) {
-        return transaccionRepository.save(transaccion);
+    public void registrarTransaccion(Transaccion transaccion) {
+        transaccionRepository.save(transaccion);
     }
 
     @Override
-    public Transaccion updateTransaccion(Transaccion transaccion, Long transaccionId) {
+    public Transaccion modificarTransaccion(Transaccion transaccion, Long transaccionId) {
         Transaccion depDB = transaccionRepository.findById(transaccionId).get();
 
         if (Objects.nonNull(transaccion.getEstado()) && !"".equalsIgnoreCase(transaccion.getEstado())) {
